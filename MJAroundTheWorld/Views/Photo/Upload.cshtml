@@ -1,0 +1,63 @@
+﻿<style>
+    .inputDiv
+    {
+        margin-top: 10px;
+    }
+    label
+    {
+        vertical-align: top;
+        display: inline-block;
+        width: 160px;
+        text-align: right;
+    }
+    form
+    {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: small;
+    }
+    .divMessage
+    {
+        font-style: italic;
+    }
+    input[type="submit"]
+    {
+        margin-top: 5px;
+        margin-left: 4px;r
+    }
+    .required
+    {
+        color: red;
+        font-weight: bolder;
+    }
+    .complete
+    {
+        color: green;
+        font-weight: bolder;
+    }
+</style>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="divMessage">
+        @Html.Raw(ViewBag.Message)
+    </div>
+    <div class="inputDiv">
+        <label for="file">Image to upload:<span class="required">*</span></label> <input type="file" name="file" id="file" />
+    </div>
+    <div class="inputDiv">
+        <label>City Photo was Taken:<span class="required">*</span></label> <input type="text" name="photoTakenCity" id="photoTakenCity" />
+    </div>
+    <div class="inputDiv">
+        <label>State Photo was Taken:<span class="required">*</span></label>
+        @Html.DropDownList("photoTakenState", ViewBag.StateList as IEnumerable<SelectListItem>, new { id = "photoTakenState" })
+        
+    </div>
+    <div class="inputDiv">
+        <label>Photo Taken Date:</label> <input type="date" name="photoTakenDate" id="photoTakenDate" />
+    </div>
+    <div class="inputDiv">
+        <label>Photo Submitted By:</label> <input type="text" name="photoSubmittedBy" id="photoSubmittedBy" maxlength="50" />
+    </div>
+    <div class="inputDiv">
+        <label>Brief Description:</label> <textarea name="description" id="description" rows="3" cols="30" maxlength="500"></textarea>
+    </div>
+    <label></label><input type="submit" value="Submit" />
+</form>

@@ -1,0 +1,70 @@
+﻿@if (ViewBag.ShowImageOnly)
+{
+    <img src="~/Images/HR-2019-T-Shirt-Contest-Intranet-Info-Pagev2-web.jpg" width="100%" style="margin: 0 auto;" />
+}
+else
+{
+<style>
+    img
+    {
+        width: 50%;
+        height: 50%;
+        border: none;
+    }
+    .divDescription
+    {
+        margin-bottom: 5px;
+    }
+    .divProvidedBy
+    {
+        font-size: smaller;
+        font-style: italic;
+    }
+    .divBody
+    {
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .cityName
+    {
+        text-transform: capitalize;
+    }
+</style>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<div class="divBody">
+    <h2><span class="cityName">@ViewBag.Location.City</span>, @ViewBag.Location.State</h2>
+    @{
+        foreach (var photo in ViewBag.Photos)
+        {
+            <a onclick="window.open('@Url.Action("Photo", "Photo", new { PhotoId = photo.PhotoId })', '_blank', 'status=1,scrollbars=1,resizable=1,titlebar=1');" href="javascript:void();"><img src='@Url.Action("Photo", "Photo", new { PhotoId = photo.PhotoId })' class="img-fluid" alt="Employee Picture" /></a>
+
+            if (!string.IsNullOrWhiteSpace(photo.Description))
+            {
+                <div class="divDescription">
+                    @photo.Description
+                </div>
+            }
+
+            if (!string.IsNullOrWhiteSpace(photo.ImageProvidedBy))
+            {
+                <div class="divProvidedBy">
+                    Photo Provided By:&nbsp;@photo.ImageProvidedBy
+                </div>
+            }
+
+            if (photo.PhotoTakenDate != null)
+            {
+                <div class="divProvidedBy">
+                    @photo.PhotoTakenDate.ToShortDateString()
+                </div>
+            }
+
+            <hr />
+        }
+    }
+</div>
+}
